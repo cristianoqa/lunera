@@ -1,0 +1,81 @@
+{
+  "pass": 14,
+  "total": 15,
+  "results": [
+    {
+      "name": "install_apk",
+      "pass": true,
+      "detail": "Performing Streamed Install\nSuccess\n"
+    },
+    {
+      "name": "version_1_1_8",
+      "pass": true,
+      "detail": "versionName=1.1.8"
+    },
+    {
+      "name": "version_code_16",
+      "pass": true,
+      "detail": "versionCode=16"
+    },
+    {
+      "name": "home_life_chip",
+      "pass": true,
+      "detail": "Hoy | Tu ciclo, con calma y claridad | Etapa de vida: Seguimiento menstrual | 󰗶 | ETAPA DE VIDA | Seguimiento menstrual | 󰅂 | DÍA DEL CICLO | 4 | Menstrual | 󰙴 | TU CUERPO HOY | Día 4 · Fase Menstrual | Tus niveles de estrógeno y progesterona están b"
+    },
+    {
+      "name": "home_ai",
+      "pass": true,
+      "detail": "Hoy | Tu ciclo, con calma y claridad | Etapa de vida: Seguimiento menstrual | 󰗶 | ETAPA DE VIDA | Seguimiento menstrual | 󰅂 | DÍA DEL CICLO | 4 | Menstrual | 󰙴 | TU CUERPO HOY | Día 4 · Fase Menstrual | Tus niveles de estrógeno y progesterona están b"
+    },
+    {
+      "name": "tap_life_or_settings",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "life_mode_screen",
+      "pass": true,
+      "detail": "Etapa de vida | Elige un modo. Cambia el anillo de Inicio, el calendario y las notificaciones. Solo uno puede estar activo. | Seguimiento menstrual, Predicción de regla, ventana fértil y anillo de ciclo. | Seguimiento menstrual | Predicción de regla, ventana fértil y anillo de ciclo. | Anticonceptiv"
+    },
+    {
+      "name": "tap_menopause",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "tap_save_mode",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "confirm_dialog",
+      "pass": true,
+      "detail": "¿Cambiar de etapa? | Se deja de predecir regla, ovulación y ventana fértil. El calendario pasa a ser un diario de síntomas. Tus registros recientes se conservan. | CANCELAR | CAMBIAR ETAPA"
+    },
+    {
+      "name": "home_after_meno",
+      "pass": true,
+      "detail": "Hoy | Tu ciclo, con calma y claridad | Etapa de vida: Perimenopausia y menopausia | 󰗶 | ETAPA DE VIDA | Perimenopausia y menopausia | 󰅂 | 󰳒 | BIENESTAR EN LA TRANSICIÓN | Corazón y tensión | El riesgo cardiovascular sube tras la menopausia. Caminar, dormir y vigilar tensión, colesterol y glucosa imp"
+    },
+    {
+      "name": "home_ai_after",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "home_no_cycle_day",
+      "pass": true,
+      "detail": "Hoy | Tu ciclo, con calma y claridad | Etapa de vida: Perimenopausia y menopausia | 󰗶 | ETAPA DE VIDA | Perimenopausia y menopausia | 󰅂 | 󰳒 | BIENESTAR EN LA TRANSICIÓN | Corazón y tensión | El riesgo"
+    },
+    {
+      "name": "cal_no_period_legend",
+      "pass": false,
+      "detail": "Calendario | Tu calendario | En esta etapa el calendario no pinta regla ni ovulación. Toca un día o usa Registro para síntomas. | Mes | Mes | Anual | Anual | 󰅁 | 󰅁 | Hoy | Hoy | 󰅂 | 󰅂 | August 2026 | L | M | X | J | V | S | D | 1 | 1 | 2 | 2 | 3 | 3 | 4 | 4 | 5 | 5 | 6 | 6 | 7 | 7 | 8 | 8 | 9 | 9 | "
+    },
+    {
+      "name": "cal_stage_copy",
+      "pass": true,
+      "detail": "Calendario | Tu calendario | En esta etapa el calendario no pinta regla ni ovulación. Toca un día o usa Registro para síntomas. | Mes | Mes | Anual | Anual | 󰅁 | 󰅁 | Hoy | Hoy | 󰅂 | 󰅂 | August 2026 | L | M | X | J | V | S | D | 1 | 1 | 2 | 2 | 3 | 3 | 4 | 4 | 5 | 5 | 6 | 6 | 7 | 7 | 8 | 8 | 9 | 9 | "
+    }
+  ]
+}

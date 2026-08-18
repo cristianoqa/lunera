@@ -1,0 +1,66 @@
+{
+  "pass": 10,
+  "fail": 0,
+  "checks": [
+    {
+      "id": "L2-01",
+      "title": "Foreground is Lunera Home",
+      "status": "PASS",
+      "notes": "texts=['Hoy', 'Tu ciclo, con calma y claridad', 'DÍA DEL CICLO', '3', 'Menstrual', '&#984692;', 'TU CUERPO HOY', 'Día 3 · Fase Menstrual', 'Tus niveles de estrógeno y progesterona están bajos mientras el endometrio se desprende. Es normal notar fatiga o sensibilidad. Prioriza descanso, hidratación profunda y alimentos ricos en hierro.', '&#988954;', 'Pregúntale a Lunera IA', 'Lunera IA es una herramienta de asistencia educativa y de bienestar. No provee diagnósticos médicos oficiales ni sustituye la consulta ginecológica profesional.', '&#985555;', 'Próxima regla', '26 días', '&#984737;', 'Inicio', '&#986648;']"
+    },
+    {
+      "id": "L2-02",
+      "title": "Tab Calendario",
+      "status": "PASS",
+      "notes": "tap=True on_lunera=True texts=['Calendario', 'Tu calendario', 'Historial real y predicción flexible. Toca un día para editar.', '&#127827;&#127793;&#128302;', 'Mes', 'Anual', '&#127827;', 'Regla real', '&#127793;', 'Ovulación', '&#128302;', 'Ventana fértil', '&#983361;', 'Hoy', '&#983362;', 'August 2026', 'D', 'L']"
+    },
+    {
+      "id": "L2-03",
+      "title": "Tab Registro",
+      "status": "PASS",
+      "notes": "tap=True on_lunera=True texts=['Registro', 'Registro diario', '2026-08-16', 'SANGRADO', 'Intensidad del sangrado hoy (0 = nada, 5 = muy abundante).', '0', 'Nada', '1', 'Mínimo', '2', 'Leve', '3', 'Medio', '4', 'Fuerte', '5', 'Muy fuerte', 'NIVEL DE DOLOR']"
+    },
+    {
+      "id": "L2-04",
+      "title": "Tab Tendencias",
+      "status": "PASS",
+      "notes": "tap=True on_lunera=True texts=['Tendencias', 'Tendencias', 'Gráficos de tus últimos registros. Cuantos más días registres, más claras serán las tendencias.', 'Dolor (últimos días)', 'Registra al menos 2 días para ver la gráfica.', 'Sangrado (últimos días)', 'Registra al menos 2 días para ver la gráfica.', 'Dolor de cabeza en fase lútea', '0 días registrados', 'Dolor medio fase lútea', '—', 'Fase de hoy', 'Menstrual', 'Función Lunera Pro', 'Activa Lunera Pro para correlaciones avanzadas.', 'Ver Lunera Pro', '&#984737;', 'Inicio']"
+    },
+    {
+      "id": "L2-05",
+      "title": "Tab Aprende",
+      "status": "PASS",
+      "notes": "tap=True on_lunera=True texts=['Aprende', 'Glosario Lunera', 'Ciencia clara sobre tu ciclo, sin diagnósticos ni alarmismo.', 'Las 4 fases hormonales', '&#983363;', 'Fase menstrual (días 1-5)', '&#984089;', 'Fase folicular (días 6-13)', '&#984089;', 'La ovulación (día 14 aprox.)', '&#984089;', 'Fase lútea (días 15-28)', '&#984089;', 'Entendiendo el dolor y síntomas', '&#983360;', 'Anticonceptivos y tu ciclo', '&#983360;', 'Alertas médicas y patologías']"
+    },
+    {
+      "id": "L2-06",
+      "title": "Tab Ajustes",
+      "status": "PASS",
+      "notes": "tap=True on_lunera=True texts=['Ajustes', '&#983461;', 'Lunera Pro', 'Informe PDF, analíticas avanzadas y sync cifrada. Compra segura en la tienda.', '&#984544;', 'Exportar informe médico PDF', '&#984544;', 'Correlaciones avanzadas', '&#984544;', 'Copia de seguridad cifrada en nube', 'Obtener Lunera Pro', '&#983124;', 'CUENTA Y SEGURIDAD', '&#985089;', 'Iniciar sesión / Sincronizar cuenta', 'Sal del modo invitado y protege tus datos en la nube', '&#983362;', '&#983607;']"
+    },
+    {
+      "id": "L2-07",
+      "title": "Theme / Medianoche control",
+      "status": "PASS",
+      "notes": "opened=True mid=True texts=['Ajustes', '&#983538;', 'Personalizar mis Iconos', 'Elige cómo se ven tus fases en el calendario', '&#983362;', '&#988954;', 'Pregúntale a Lunera IA', 'Chat educativo con tu contexto de ciclo', '&#983362;', 'Tema visual', 'Lino', 'Lavanda', 'Rosa', 'Salvia', 'Medianoche', 'Melocotón', 'DATOS', '&#983559;', 'Exportar backup cifrado', '&#983362;']"
+    },
+    {
+      "id": "L2-08",
+      "title": "AI chat with input field",
+      "status": "PASS",
+      "notes": "opened=True edits=1 texts=['Pregúntale a Lunera IA', 'Hola. Soy Lunera IA. Puedo ayudarte a entender tu ciclo con base educativa (OMS/ACOG). ¿Qué te preocupa hoy?', 'Lunera IA es una herramienta de asistencia educativa y de bienestar. No provee diagnósticos médicos oficiales ni sustituye la consulta ginecológica profesional.', 'Escribe tu pregunta…', '&#984202;']"
+    },
+    {
+      "id": "L2-09",
+      "title": "AI chat can type message",
+      "status": "PASS",
+      "notes": "texts=['Pregúntale a Lunera IA', 'Hola. Soy Lunera IA. Puedo ayudarte a entender tu ciclo con base educativa (OMS/ACOG). ¿Qué te preocupa hoy?', 'Lunera IA es una herramienta de asistencia educativa y de bienestar. No provee diagnósticos médicos oficiales ni sustituye la consulta ginecológica profesional.', 'Hola', '&#984202;']"
+    },
+    {
+      "id": "L2-10",
+      "title": "Calendar month/annual controls",
+      "status": "PASS",
+      "notes": "month=True year=True texts=['Calendario', 'Tu calendario', 'Historial real y predicción flexible. Toca un día para editar.', '&#127827;&#127793;&#128302;', 'Mes', 'Anual', '&#127827;', 'Regla real', '&#127793;', 'Ovulación', '&#128302;', 'Ventana fértil', 'February 2026', 'D', 'L', 'M', 'X', 'J', 'V', 'S']"
+    }
+  ]
+}

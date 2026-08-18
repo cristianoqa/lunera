@@ -1,0 +1,48 @@
+{
+  "pass": 6,
+  "fail": 1,
+  "checks": [
+    {
+      "id": "L00",
+      "title": "Installed 1.1.4 / vc12",
+      "status": "PASS",
+      "notes": "vn=1.1.4 vc=12"
+    },
+    {
+      "id": "L01",
+      "title": "Reach main app shell",
+      "status": "PASS",
+      "notes": "sample=['Registro', 'Registro diario', '2026-08-16', 'SANGRADO', 'Intensidad del sangrado hoy (0 = nada, 5 = muy abundante).', '0', 'Nada', '1', 'Mínimo', '2', 'Leve', '3', 'Medio', '4', 'Fuerte', '5', 'Muy fuerte', 'NIVEL DE DOLOR', 'Intensidad del dolor de hoy, no el día del ciclo. 0 = sin dolor, 5 = severo.', '0']"
+    },
+    {
+      "id": "L02",
+      "title": "Settings/theme reachable",
+      "status": "PASS",
+      "notes": "opened=True tapped=False texts=['Ajustes', '&#983461;', 'Lunera Pro', 'Informe PDF, analíticas avanzadas y sync cifrada. Compra segura en la tienda.', '&#984544;', 'Exportar informe médico PDF', '&#984544;', 'Correlaciones avanzadas', '&#984544;', 'Copia de seguridad cifrada en nube', 'Obtener Lunera Pro', '&#983124;', 'CUENTA Y SEGURIDAD', '&#985089;', 'Iniciar sesión / Sincronizar cuenta', 'Sal del modo invitado y protege tus datos en la nube', '&#983362;', '&#983607;', 'Bloqueo por biometría (Face ID / PIN)', 'Protege el acceso a tus datos de salud']"
+    },
+    {
+      "id": "L03",
+      "title": "Log/Registro screen",
+      "status": "PASS",
+      "notes": "texts=['Gasto rápido', 'Registra sin fricción', 'Importe, categoría y guardar. La nota es opcional. Para tickets o recordatorios usa el formulario completo.', 'Monto', '&#983918;', 'Nota (opcional)', 'Elige categoría', 'Ocio', 'Gasto guardado. Puedes registrar otro.', '&#983617;', 'Guardar gasto', '&#986795;', 'Abrir formulario completo']"
+    },
+    {
+      "id": "L04",
+      "title": "Calendar screen",
+      "status": "PASS",
+      "notes": "texts=['Inicio', 'Sincronización al día', '⚡', 'Gasto rápido', '›', '&#128182; Disponible seguro este mes', '$2,160.77', 'Te quedan ~$135.05/día durante 16 días.', '&#987021;', 'Editar widgets', 'Dinero', '&#128188;', 'Movimientos recientes', '⚖️', 'Saldos del grupo', '&#128198;', 'Resumen mensual', '&#128176;', 'Presupuestos', 'Planificar', '&#128197;', 'Cierre de mes', '&#129534;', 'Suscripciones', '&#128091;']"
+    },
+    {
+      "id": "L05",
+      "title": "AI chat opens with input",
+      "status": "PASS",
+      "notes": "opened=True input=False texts=['Sun, Aug 16', 'Play Store', 'Gmail', 'Photos', 'YouTube', 'Phone', 'Messages', 'Chrome', 'Lunera']"
+    },
+    {
+      "id": "L06",
+      "title": "Learn/Insights opens",
+      "status": "FAIL",
+      "notes": "texts=['Sun, Aug 16', 'Play Store', 'Gmail', 'Photos', 'YouTube', 'Phone', 'Messages', 'Chrome', 'Gmail']"
+    }
+  ]
+}

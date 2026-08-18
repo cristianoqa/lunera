@@ -1,0 +1,106 @@
+{
+  "pass": 19,
+  "total": 20,
+  "results": [
+    {
+      "name": "install_apk",
+      "pass": true,
+      "detail": "Performing Streamed Install\nSuccess\n"
+    },
+    {
+      "name": "version_1_1_7",
+      "pass": true,
+      "detail": "versionName=1.1.7 versionCode=15"
+    },
+    {
+      "name": "version_code_15",
+      "pass": true,
+      "detail": "versionCode=15"
+    },
+    {
+      "name": "home_opened",
+      "pass": true,
+      "detail": "Hoy | Tu ciclo, con calma y claridad | DÍA DEL CICLO | 4 | Menstrual | 󰙴 | TU CUERPO HOY | Día 4 · Fase Menstrual | Tus niveles de estrógeno y progesterona están bajos mientras el endometrio se desprende. Es normal notar fatiga o sensibilidad. Prioriza descanso, hidratación profunda y alimentos rico"
+    },
+    {
+      "name": "home_no_ir_a_registro",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "home_logs_card",
+      "pass": true,
+      "detail": " Desbloquea tu Reporte Ginecológico Completo en PDF | 󰅂 | Obtener Lunera Pro | 󰚡, Inicio | 󰚡 | Inicio | 󰸘, Calendario | 󰸘 | Calendario | 󱓩, Registro | 󱓩 | Registro | 󰄪, Tendencias | 󰄪 | Tendencias | 󱗖, Aprende | 󱗖 | Aprende | 󰢻, Ajustes | 󰢻 | Ajustes"
+    },
+    {
+      "name": "tap_registro_tab",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "log_title",
+      "pass": true,
+      "detail": "Registro | Registro diario | 2026-08-17 | SANGRADO | Intensidad del sangrado hoy (0 = nada, 5 = muy abundante). | 0: Nada | 0 | Nada | 1: Mínimo | 1 | Mínimo | 2: Leve | 2 | Leve | 3: Medio | 3 | Medio | 4: Fuerte | 4 | Fuerte | 5: Muy fuerte | 5 | M"
+    },
+    {
+      "name": "log_mucus",
+      "pass": true,
+      "detail": "Registro | Registro diario | 2026-08-17 | SANGRADO | Intensidad del sangrado hoy (0 = nada, 5 = muy abundante). | 0: Nada | 0 | Nada | 1: Mínimo | 1 | Mínimo | 2: Leve | 2 | Leve | 3: Medio | 3 | Medio | 4: Fuerte | 4 | Fuerte | 5: Muy fuerte | 5 | Muy fuerte | MOCO CERVICAL | Opcional. Ayuda a ver "
+    },
+    {
+      "name": "log_sex",
+      "pass": true,
+      "detail": "1: Leve | 1 | Leve | 2: Medio | 2 | Medio | 3: Notable | 3 | Notable | 4: Alto | 4 | Alto | 5: Muy alto | 5 | Muy alto | Notas | 󰚡, Inicio | 󰚡 | Inicio | 󰸘, Calendario | 󰸘 | Calendario | 󱓩, Registro | 󱓩 | Registro | 󰄪, Tendencias | 󰄪 | Tendencias | 󱗖, Aprende | 󱗖 | Aprende | 󰢻, Ajustes | 󰢻 | Ajustes"
+    },
+    {
+      "name": "log_habits",
+      "pass": true,
+      "detail": "1: Leve | 1 | Leve | 2: Medio | 2 | Medio | 3: Notable | 3 | Notable | 4: Alto | 4 | Alto | 5: Muy alto | 5 | Muy alto | Notas | 󰚡, Inicio | 󰚡 | Inicio | 󰸘, Calendario | 󰸘 | Calendario | 󱓩, Registro | 󱓩 | Registro | 󰄪, Tendencias | 󰄪 | Tendencias | 󱗖, Aprende | 󱗖 | Aprende | 󰢻, Ajustes | 󰢻 | Ajustes"
+    },
+    {
+      "name": "log_water",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "log_no_vague_ojos",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "log_no_vague_cabello",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "tap_mucus_egg",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "tap_save",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "saved_feedback",
+      "pass": true,
+      "detail": "Registro | Dolor pélvico | Dolor pélvico | Apetito ↑ | Apetito ↑ | Apetito ↓ | Apetito ↓ | Sed | Sed | Escalofríos | Escalofríos | Sudor nocturno | Sudor nocturno | Zumbido | Zumbido | Palpitaciones | Palpitaciones | Falta de aire | Falta de aire | I"
+    },
+    {
+      "name": "home_after_log",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "tap_logs_card",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "card_opens_log",
+      "pass": false,
+      "detail": "Registro | Dolor pélvico | Dolor pélvico | Apetito ↑ | Apetito ↑ | Apetito ↓ | Apetito ↓ | Sed | Sed | Escalofríos | Escalofríos | Sudor nocturno | Sudor nocturno | Zumbido | Zumbido | Palpitaciones | Palpitaciones | Falta de aire | Falta de aire | ITU | ITU | Candidiasis | Candidiasis | Flujo | Flu"
+    }
+  ]
+}

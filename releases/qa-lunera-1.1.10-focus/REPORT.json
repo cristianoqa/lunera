@@ -1,0 +1,56 @@
+{
+  "pass": 7,
+  "total": 10,
+  "results": [
+    {
+      "name": "install_apk_1_1_10",
+      "pass": true,
+      "detail": "Performing Streamed Install\nSuccess"
+    },
+    {
+      "name": "version_1_1_10",
+      "pass": true,
+      "detail": "versionName=1.1.10"
+    },
+    {
+      "name": "home_loaded",
+      "pass": true,
+      "detail": "Hoy | Tu ciclo, con calma y claridad | Etapa de vida: Perimenopausia y menopausia | 󰗶 | ETAPA DE VIDA | Perimenopausia y menopausia | 󰅂 | 󰳒 | BIENESTAR EN LA TRANSICIÓN | Sequedad e incomodidad | La sequedad vaginal y las relaciones dolorosas son tra"
+    },
+    {
+      "name": "open_log_tab",
+      "pass": true,
+      "detail": "Registro | Registro diario | 2026-08-18 | SANGRADO | Intensidad del sangrado hoy (0 = nada, 5 = muy abundante). | 0: Nada | 0 | Nada | 1: Mínimo | 1 | Mínimo | 2: Leve | 2 | Leve | 3: Medio | 3 | Medio | 4: Fuerte | 4 | Fuerte | 5: Muy fuerte | 5 | M"
+    },
+    {
+      "name": "save_log",
+      "pass": false,
+      "detail": "La sequedad vaginal y las relaciones dolorosas son tratables (hidratantes, lubricantes, terapias locales). No es algo que «haya que aguantar». | Si hay picores, mal olor o sangrado postmenopáusico, pide cita: el sangrado tras 12 meses sin regla merec"
+    },
+    {
+      "name": "recent_logs_reflect_today",
+      "pass": true,
+      "detail": "La sequedad vaginal y las relaciones dolorosas son tratables (hidratantes, lubricantes, terapias locales). No es algo que «haya que aguantar». | Si hay picores, mal olor o sangrado postmenopáusico, pide cita: el sangrado tras 12 meses sin regla merece valoración. | 󰙴 | TU CUERPO HOY | Hoy · Transición y menopausia | La sequedad vaginal y las relaci"
+    },
+    {
+      "name": "month_format_without_de",
+      "pass": true,
+      "detail": "august 2026"
+    },
+    {
+      "name": "calendar_swipe_changes_month",
+      "pass": true,
+      "detail": "august 2026 -> september 2026"
+    },
+    {
+      "name": "logout_works",
+      "pass": false,
+      "detail": "No se encontró botón de cerrar sesión (perfil en modo invitado o flujo roto)."
+    },
+    {
+      "name": "open_profile_screen",
+      "pass": false,
+      "detail": "Navigate up | Iniciar sesión / Sincronizar cuenta | Iniciar sesión / Sincronizar cuenta | Crea una cuenta con email y contraseña para salir del modo invitado. Tus registros se conservan. | Crear cuenta | Crear cuenta | Iniciar sesión | Iniciar sesión"
+    }
+  ]
+}

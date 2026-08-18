@@ -1,0 +1,87 @@
+{
+  "expo": {
+    "name": "Lunera",
+    "slug": "lunera",
+    "version": "1.1.10",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "lunera",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FBF9F6"
+    },    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.flowhome.lunera",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Lunera usa Face ID para proteger tus datos de salud.",
+        "NSUserNotificationsUsageDescription": "Lunera te envía recordatorios locales sobre tu ciclo y tu registro diario.",
+        "UIBackgroundModes": [
+          "fetch",
+          "remote-notification"
+        ],
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleDisplayName": "Lunera"
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.flowhome.lunera",
+      "versionCode": 18,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FBF9F6"
+      },
+      "permissions": [
+        "USE_BIOMETRIC",
+        "USE_FINGERPRINT",
+        "POST_NOTIFICATIONS",
+        "READ_MEDIA_IMAGES",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
+      ]
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-localization",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#7C3AED"
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Lunera usa Face ID para proteger tus datos de salud."
+        }
+      ],
+      "expo-font"
+    ],
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/icon.png",
+      "name": "Lunera",
+      "shortName": "Lunera",
+      "lang": "es",
+      "themeColor": "#4A3F6B",
+      "backgroundColor": "#FBF9F6",
+      "display": "standalone"
+    },
+    "experiments": {
+      "baseUrl": "/lunera"
+    },
+    "owner": "proyectgastosapp",
+    "extra": {
+      "eas": {
+        "projectId": "71cbb0b8-5304-4ec5-be89-8a83c4f7de6c"
+      }
+    }
+  }
+}
