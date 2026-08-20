@@ -49,7 +49,8 @@ Todas las apps viven en `D:\` en Windows. Cursor debe tener esto en cuenta siemp
 
 - **Prioridad free-first**: usar siempre servicios con tier gratuito (Gemini, Supabase Free, Vercel Hobby, Render Free, GitHub Pages). No integrar APIs de pago (OpenAI, Stripe, etc.) hasta que la app demuestre tracción/rentabilidad. Documentar alternativas gratuitas antes de proponer de pago.
 - Responder siempre en **español**.
-- **Operaciones autónomas (sin pedir permiso):** commits, push, deploy (Vercel, Render, GitHub Pages), generación de APK, subida de APK a landing/releases, bump de versión en `version.json`, y cualquier paso necesario del flujo de entrega. Informar al usuario *después* de ejecutarlo, no pedir confirmación antes.
+- **Validación obligatoria tras cada desarrollo (SIEMPRE):** no dar por entregado un cambio solo porque compile. Antes de informar al usuario (y antes/después del deploy), probar como mínimo lo tocado: (1) build/tipos, (2) flujo de UI en navegador o emulador de las pantallas/funciones modificadas, (3) casos borde claros del cambio (filtros vacíos, botones deshabilitados, vacío, error). Si algo falla, corregir antes de cerrar. Un build OK ≠ producto validado.
+- **Operaciones autónomas (sin pedir permiso):** commits, push, deploy (Vercel, Render, GitHub Pages), generación de APK, subida de APK a landing/releases, bump de versión en `version.json`, y cualquier paso necesario del flujo de entrega. Informar al usuario *después* de ejecutarlo, no pedir confirmación antes. La autonomía **no** exime de la validación anterior.
 - **No commitear nunca** `.env`, `CREDENTIALS.md`, secretos ni claves API.
 - Antes de escribir código Expo/React Native, leer docs en https://docs.expo.dev/versions/v57.0.0/
 - Aplicar todas las reglas definidas en las User Rules de Cursor (manejo de errores, DRY, nombres descriptivos, etc.).
