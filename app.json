@@ -2,7 +2,7 @@
   "expo": {
     "name": "Lunera",
     "slug": "lunera",
-    "version": "1.1.10",
+    "version": "1.1.12",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -11,17 +11,14 @@
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#FBF9F6"
-    },    "ios": {
+    },
+    "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.flowhome.lunera",
-      "buildNumber": "1",
+      "buildNumber": "25",
       "infoPlist": {
         "NSFaceIDUsageDescription": "Lunera usa Face ID para proteger tus datos de salud.",
         "NSUserNotificationsUsageDescription": "Lunera te envía recordatorios locales sobre tu ciclo y tu registro diario.",
-        "UIBackgroundModes": [
-          "fetch",
-          "remote-notification"
-        ],
         "ITSAppUsesNonExemptEncryption": false,
         "CFBundleDisplayName": "Lunera"
       },
@@ -31,7 +28,7 @@
     },
     "android": {
       "package": "com.flowhome.lunera",
-      "versionCode": 18,
+      "versionCode": 23,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FBF9F6"
@@ -40,7 +37,6 @@
         "USE_BIOMETRIC",
         "USE_FINGERPRINT",
         "POST_NOTIFICATIONS",
-        "READ_MEDIA_IMAGES",
         "android.permission.USE_BIOMETRIC",
         "android.permission.USE_FINGERPRINT"
       ]
@@ -73,9 +69,6 @@
       "themeColor": "#4A3F6B",
       "backgroundColor": "#FBF9F6",
       "display": "standalone"
-    },
-    "experiments": {
-      "baseUrl": "/lunera"
     },
     "owner": "proyectgastosapp",
     "extra": {
