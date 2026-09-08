@@ -10,22 +10,8 @@ import SettingsPremiumBanner from "../../components/settings/SettingsPremiumBann
 import type { AppThemeId, LocaleCode } from "../../types/config";
 import { APP_THEME_IDS, APP_THEMES } from "../../constants/appThemes";
 import { APP_VERSION } from "../../constants/appVersion";
-
-function legalUrls(lang: LocaleCode) {
-  const privacy =
-    lang === "en"
-      ? "https://cristianoqa.github.io/policies/lunera.html"
-      : lang === "pt"
-        ? "https://cristianoqa.github.io/policies/lunera-pt.html"
-        : "https://cristianoqa.github.io/policies/lunera-es.html";
-  const terms =
-    lang === "en"
-      ? "https://cristianoqa.github.io/policies/lunera-terms.html"
-      : lang === "pt"
-        ? "https://cristianoqa.github.io/policies/lunera-terms-pt.html"
-        : "https://cristianoqa.github.io/policies/lunera-terms-es.html";
-  return { privacy, terms };
-}
+import { SCENE_TAB_CLEARANCE } from "../../utils/tabBarLayout";
+import { legalUrls } from "./legalUrls";
 
 export default function SettingsScreen({ navigation }: { navigation: any }) {
   const { t, i18n } = useTranslation();
@@ -69,13 +55,22 @@ export default function SettingsScreen({ navigation }: { navigation: any }) {
   };
 
   const exportPdf = async () => {
-    if (!profile || !premiumActive) {
+    if (!premiumActive) {
       navigation.navigate("Premium");
+      return;
+    }
+    if (!profile) {
       return;
     }
     const { Alert } = await import("react-native");
     const { runMedicalPdfAction, saveMedicalPdf } = await import("../../services/pdfReportService");
+    // Android muestra como máximo 3 botones; Cancelar tiene que quedar visible.
     Alert.alert(t("pdf_export_title"), t("pdf_export_body"), [
+      { text: t("cancel"), style: "cancel" },
+      {
+        text: t("pdf_action_share"),
+        onPress: () => runMedicalPdfAction("share", { profile, prediction, logs, locale: lang, clinicalAlerts }),
+      },
       {
         text: t("pdf_action_save"),
         onPress: async () => {
@@ -86,22 +81,6 @@ export default function SettingsScreen({ navigation }: { navigation: any }) {
           );
         },
       },
-      {
-        text: t("pdf_action_share"),
-        onPress: () => runMedicalPdfAction("share", { profile, prediction, logs, locale: lang, clinicalAlerts }),
-      },
-      {
-        text: t("pdf_action_both"),
-        onPress: async () => {
-          const res = await saveMedicalPdf({ profile, prediction, logs, locale: lang, clinicalAlerts });
-          await runMedicalPdfAction("share", { profile, prediction, logs, locale: lang, clinicalAlerts });
-          Alert.alert(
-            res.savedToDownloads ? t("pdf_saved_title") : t("pdf_save_as_title"),
-            res.message
-          );
-        },
-      },
-      { text: t("cancel"), style: "cancel" },
     ]);
   };
 
@@ -313,6 +292,15 @@ export default function SettingsScreen({ navigation }: { navigation: any }) {
           />
           <Divider />
           <List.Item
+            title={t("settings_faq")}
+            description={t("settings_faq_hint")}
+            left={(p) => <List.Icon {...p} icon="frequently-asked-questions" color={colors.primary} />}
+            right={(p) => <List.Icon {...p} icon="chevron-right" />}
+            onPress={() => navigation.navigate("Faq")}
+            titleStyle={[styles.rowTitle, { color: colors.text }]}
+          />
+          <Divider />
+          <List.Item
             title={t("settings_contact_support")}
             left={(p) => <List.Icon {...p} icon="lifebuoy" color={colors.primary} />}
             right={(p) => <List.Icon {...p} icon="chevron-right" />}
@@ -343,7 +331,7 @@ export default function SettingsScreen({ navigation }: { navigation: any }) {
 
 const styles = StyleSheet.create({
   wrap: { flex: 1 },
-  content: { paddingBottom: 120 },
+  content: { paddingBottom: SCENE_TAB_CLEARANCE },
   sectionTitle: {
     fontWeight: "700",
     fontSize: 13,

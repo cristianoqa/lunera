@@ -1,7 +1,9 @@
 import React from "react";
+import { Platform } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import HomeScreen from "../screens/dashboard/HomeScreen";
 import CalendarScreen from "../screens/calendar/CalendarScreen";
 import LogScreen from "../screens/log/LogScreen";
@@ -10,6 +12,7 @@ import LearnScreen from "../screens/learn/LearnScreen";
 import SettingsScreen from "../screens/settings/SettingsScreen";
 import AboutScreen from "../screens/settings/AboutScreen";
 import SupportScreen from "../screens/settings/SupportScreen";
+import FaqScreen from "../screens/settings/FaqScreen";
 import PremiumScreen from "../screens/premium/PremiumScreen";
 import ProfileScreen from "../screens/settings/ProfileScreen";
 import AccountScreen from "../screens/settings/AccountScreen";
@@ -24,6 +27,7 @@ const SettingsStack = createNativeStackNavigator();
 function SettingsStackScreen() {
   const { t } = useTranslation();
   const colors = useAppTheme();
+  const insets = useSafeAreaInsets();
   return (
     <SettingsStack.Navigator
       screenOptions={{
@@ -31,11 +35,13 @@ function SettingsStackScreen() {
         headerShadowVisible: false,
         headerTitleStyle: { fontWeight: "700", color: colors.text },
         contentStyle: { backgroundColor: colors.bgLinen },
+        ...(Platform.OS === "web" ? { headerStatusBarHeight: insets.top } : {}),
       }}
     >
       <SettingsStack.Screen name="SettingsMain" component={SettingsScreen} options={{ title: t("tab_settings") }} />
       <SettingsStack.Screen name="About" component={AboutScreen} options={{ title: t("about_title") }} />
       <SettingsStack.Screen name="Support" component={SupportScreen} options={{ title: t("support_title") }} />
+      <SettingsStack.Screen name="Faq" component={FaqScreen} options={{ title: t("faq_title") }} />
       <SettingsStack.Screen name="Premium" component={PremiumScreen} options={{ title: t("premium_title") }} />
       <SettingsStack.Screen name="Profile" component={ProfileScreen} options={{ title: t("profile_title") }} />
       <SettingsStack.Screen name="Account" component={AccountScreen} options={{ title: t("settings_login_sync") }} />
@@ -56,6 +62,7 @@ function SettingsStackScreen() {
 export default function MainTabs() {
   const { t } = useTranslation();
   const colors = useAppTheme();
+  const insets = useSafeAreaInsets();
 
   return (
     <Tab.Navigator
@@ -65,6 +72,7 @@ export default function MainTabs() {
         headerShadowVisible: false,
         headerTitleStyle: { fontWeight: "700", color: colors.text },
         sceneStyle: { backgroundColor: colors.bgLinen },
+        ...(Platform.OS === "web" ? { headerStatusBarHeight: insets.top } : {}),
       }}
     >
       <Tab.Screen name="HomeTab" component={HomeScreen} options={{ title: t("tab_home"), headerShown: false }} />
