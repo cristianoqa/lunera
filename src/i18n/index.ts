@@ -466,22 +466,24 @@ const esExtra = {
     "Registrar cada día es lo ideal, pero no es obligatorio. Lo más importante es marcar el Día 1 de cada regla (inicio) y el último día. Los síntomas, estado de ánimo y hábitos son opcionales y enriquecen las tendencias en la pestaña Tendencias.",
   faq_q_guest: "¿Cuál es la diferencia entre modo invitado y cuenta?",
   faq_a_guest:
-    "En modo invitado tus datos viven solo en este teléfono. Si creas una cuenta, puedes exportar copias cifradas y, en el futuro, sincronizar entre dispositivos. No necesitas cuenta para usar ninguna función principal.",
+    "En modo invitado tus datos viven solo en este teléfono. Con o sin cuenta puedes exportar e importar copias cifradas desde Ajustes. Una cuenta permite iniciar sesión en este dispositivo y, cuando esté disponible, sincronización cifrada en la nube. No necesitas cuenta para las funciones principales.",
   faq_q_backup: "¿Cómo funciona la copia de seguridad? ¿Es segura?",
   faq_a_backup:
-    "El backup se cifra en tu dispositivo antes de salir de la app. El archivo cifrado solo puede importarse de nuevo en Lunera con la clave que se genera en tu teléfono. Ni Flow Home Apps ni nadie más puede leerlo.",
+    "Desde Ajustes puedes exportar e importar un backup cifrado en el propio dispositivo (AES). El archivo solo se puede restaurar en Lunera con la clave de este teléfono. Ni Flow Home Apps ni nadie más puede leerlo. La sincronización en la nube, si la usas con cuenta, también va cifrada.",
   faq_q_notifications: "¿Por qué Lunera pide permiso de notificaciones?",
   faq_a_notifications:
-    "Solo para enviarte el recordatorio diario de registro si lo activas en Ajustes. No hay notificaciones de marketing. Puedes desactivarlo en cualquier momento desde Ajustes → Recordatorio diario.",
+    "Para recordatorios útiles: el diario de registro (si lo activas en Ajustes), aviso de periodo próximo y recordatorios de anticonceptivos según tu etapa. No hay notificaciones de marketing. Puedes desactivar el recordatorio diario en Ajustes o revocar el permiso en el sistema.",
   faq_q_premium: "¿Qué incluye Lunera Pro? ¿Hay funciones de pago?",
   faq_a_premium:
-    "Lunera es gratis y sin anuncios. Lunera Pro añade el informe médico PDF y correlaciones avanzadas en Tendencias. La app funciona completamente sin Pro; el plan gratuito nunca caduca.",
+    "Lunera es gratis y sin anuncios. Lunera Pro es opcional y añade el informe médico PDF (y mejoras Pro en Tendencias cuando estén activas). La app funciona completa sin Pro; el plan gratuito nunca caduca.",
   faq_q_settings: "¿Puedo volver a ver el onboarding o cambiar mi etapa de vida?",
   faq_a_settings:
-    "Sí. Ve a Ajustes → Etapa de vida para cambiar tu modo (menstruación, anticonceptivos, embarazo, menopausia) en cualquier momento. Tus registros previos se conservan siempre.",
+    "Puedes cambiar tu etapa en Ajustes → Etapa de vida (menstruación, anticonceptivos, embarazo, menopausia) sin perder registros. FAQ, soporte y el resto de ajustes están siempre en la pestaña Ajustes. El onboarding completo solo vuelve a mostrarse si borras la cuenta o los datos de la app.",
   faq_q_learn_diff: "¿En qué se diferencia esta FAQ de la pestaña Aprende?",
   faq_a_learn_diff:
     "La pestaña Aprende es un glosario científico sobre el ciclo menstrual, hormonas y etapas. Esta pantalla explica cómo usar Lunera: predicciones, registros, cuenta y ajustes.",
+  about_open_faq: "Ver preguntas frecuentes",
+  support_open_faq: "Antes de escribir: consulta la FAQ",
 };
 
 const enExtra = {
@@ -948,22 +950,24 @@ const enExtra = {
     "Every day is ideal, but not required. The most important thing is to mark Day 1 of each period (start) and the last day. Symptoms, moods, and habits are optional and enrich the charts in the Insights tab.",
   faq_q_guest: "What is the difference between guest mode and an account?",
   faq_a_guest:
-    "In guest mode, your data lives only on this phone. If you create an account, you can export encrypted backups and, in the future, sync across devices. You do not need an account to use any main feature.",
+    "In guest mode, your data lives only on this phone. With or without an account you can export and import encrypted backups from Settings. An account lets you sign in on this device and, when available, use encrypted cloud sync. You do not need an account for the main features.",
   faq_q_backup: "How does backup work? Is it secure?",
   faq_a_backup:
-    "The backup is encrypted on your device before leaving the app. The encrypted file can only be imported back into Lunera using the key generated on your phone. Neither Flow Home Apps nor anyone else can read it.",
+    "From Settings you can export and import a backup encrypted on-device (AES). The file can only be restored in Lunera with this phone’s key. Neither Flow Home Apps nor anyone else can read it. Cloud sync, if you use it with an account, is also encrypted.",
   faq_q_notifications: "Why does Lunera ask for notification permission?",
   faq_a_notifications:
-    "Only to send your daily logging reminder if you enable it in Settings. There are no marketing notifications. You can turn it off anytime from Settings → Daily reminder.",
+    "For useful reminders: the daily logging reminder (if you enable it in Settings), an upcoming-period alert, and contraception reminders based on your life stage. There are no marketing notifications. You can turn off the daily reminder in Settings or revoke the permission in system settings.",
   faq_q_premium: "What does Lunera Pro include? Are there paid features?",
   faq_a_premium:
-    "Lunera is free and ad-free. Lunera Pro adds the medical PDF report and advanced correlations in Insights. The app works completely without Pro; the free plan never expires.",
+    "Lunera is free and ad-free. Lunera Pro is optional and adds the medical PDF report (and Pro Insights upgrades when enabled). The app works fully without Pro; the free plan never expires.",
   faq_q_settings: "Can I redo onboarding or change my life stage?",
   faq_a_settings:
-    "Yes. Go to Settings → Life stage to change your mode (menstruation, contraception, pregnancy, menopause) anytime. Your previous logs are always kept.",
+    "You can change your life stage anytime in Settings → Life stage (menstruation, contraception, pregnancy, menopause) without losing logs. FAQ, support, and other options stay under the Settings tab. Full onboarding only appears again if you delete your account or clear the app data.",
   faq_q_learn_diff: "How is this FAQ different from the Learn tab?",
   faq_a_learn_diff:
     "The Learn tab is a scientific glossary about the menstrual cycle, hormones, and life stages. This screen explains how to use Lunera: predictions, logging, account, and settings.",
+  about_open_faq: "View FAQ",
+  support_open_faq: "Before writing: check the FAQ",
 };
 
 const ptExtra = {
@@ -1430,22 +1434,24 @@ const ptExtra = {
     "Registrar todo dia é ideal, mas não é obrigatório. O mais importante é marcar o Dia 1 de cada menstruação (início) e o último dia. Sintomas, humor e hábitos são opcionais e enriquecem os gráficos em Tendências.",
   faq_q_guest: "Qual é a diferença entre o modo visitante e uma conta?",
   faq_a_guest:
-    "No modo visitante, seus dados ficam só neste telefone. Se você criar uma conta, pode exportar cópias criptografadas e, no futuro, sincronizar entre dispositivos. Você não precisa de conta para usar nenhuma função principal.",
+    "No modo visitante, seus dados ficam só neste telefone. Com ou sem conta você pode exportar e importar cópias criptografadas em Ajustes. Uma conta permite iniciar sessão neste dispositivo e, quando disponível, sincronização criptografada na nuvem. Você não precisa de conta para as funções principais.",
   faq_q_backup: "Como funciona o backup? É seguro?",
   faq_a_backup:
-    "O backup é criptografado no seu dispositivo antes de sair do app. O arquivo criptografado só pode ser importado de volta no Lunera com a chave gerada no seu telefone. Nem a Flow Home Apps nem ninguém mais pode lê-lo.",
+    "Em Ajustes você pode exportar e importar um backup criptografado no próprio dispositivo (AES). O arquivo só pode ser restaurado no Lunera com a chave deste telefone. Nem a Flow Home Apps nem ninguém mais pode lê-lo. A sincronização na nuvem, se usada com conta, também é criptografada.",
   faq_q_notifications: "Por que o Lunera pede permissão de notificações?",
   faq_a_notifications:
-    "Apenas para enviar o lembrete diário de registro se você o ativar em Ajustes. Não há notificações de marketing. Você pode desativá-lo a qualquer momento em Ajustes → Lembrete diário.",
+    "Para lembretes úteis: o diário de registro (se você ativar em Ajustes), aviso de menstruação próxima e lembretes de anticoncepcionais conforme sua etapa. Não há notificações de marketing. Você pode desativar o lembrete diário em Ajustes ou revogar a permissão no sistema.",
   faq_q_premium: "O que inclui o Lunera Pro? Há funções pagas?",
   faq_a_premium:
-    "O Lunera é grátis e sem anúncios. O Lunera Pro adiciona o relatório médico em PDF e correlações avançadas em Tendências. O app funciona completamente sem o Pro; o plano gratuito nunca expira.",
+    "O Lunera é grátis e sem anúncios. O Lunera Pro é opcional e adiciona o relatório médico em PDF (e melhorias Pro em Tendências quando ativas). O app funciona completo sem o Pro; o plano gratuito nunca expira.",
   faq_q_settings: "Posso refazer o onboarding ou mudar minha etapa de vida?",
   faq_a_settings:
-    "Sim. Vá em Ajustes → Etapa de vida para mudar seu modo (menstruação, anticoncepcionais, gravidez, menopausa) a qualquer momento. Seus registros anteriores são sempre mantidos.",
+    "Você pode mudar sua etapa em Ajustes → Etapa de vida (menstruação, anticoncepcionais, gravidez, menopausa) sem perder registros. FAQ, suporte e o restante ficam sempre na aba Ajustes. O onboarding completo só volta se você apagar a conta ou os dados do app.",
   faq_q_learn_diff: "Qual a diferença entre esta FAQ e a aba Aprenda?",
   faq_a_learn_diff:
     "A aba Aprenda é um glossário científico sobre o ciclo menstrual, hormônios e etapas de vida. Esta tela explica como usar o Lunera: previsões, registros, conta e ajustes.",
+  about_open_faq: "Ver perguntas frequentes",
+  support_open_faq: "Antes de escrever: consulte a FAQ",
 };
 
 const resources = {
