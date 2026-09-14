@@ -11,7 +11,6 @@ import WellnessBackground from "../../components/ui/WellnessBackground";
 import BodyTodayCard from "../../components/home/BodyTodayCard";
 import PeriodInsightCard from "../../components/home/PeriodInsightCard";
 import LogsInsightCard from "../../components/home/LogsInsightCard";
-import PremiumUpsellBanner from "../../components/home/PremiumUpsellBanner";
 import PregnancyRing from "../../components/home/PregnancyRing";
 import PregnancyWeekCard from "../../components/home/PregnancyWeekCard";
 import PostpartumCard from "../../components/home/PostpartumCard";
@@ -19,12 +18,21 @@ import ContraceptionCard from "../../components/home/ContraceptionCard";
 import MenopausePanel from "../../components/home/MenopausePanel";
 import LifeStageChip from "../../components/home/LifeStageChip";
 import ClinicalAlertsCard from "../../components/home/ClinicalAlertsCard";
+import PrenatalChecklist from "../../components/home/PrenatalChecklist";
 import { buildAiContextFromStore, generateBodyTodayAi } from "../../services/luneraAiService";
 import { summarizeRecentSymptoms } from "../../utils/symptomSummary";
 import { resolveAppMode, isPostpartumMode, shouldPredictPeriods } from "../../services/lifeCycleService";
 import { pregnancyMilestoneHint, pregnancyProgress } from "../../services/pregnancyService";
 import { getMenopauseAdvice } from "../../content/menopauseAdvice";
 import { todayISOLocal } from "../../services/cyclePredictor";
+import { loggingStreak } from "../../services/adherenceService";
+import { phaseCareCopy } from "../../services/phaseCareService";
+import { toggleVisitId } from "../../services/prenatalVisitService";
+import OrganicCard from "../../components/ui/OrganicCard";
+import PremiumUpsellBanner from "../../components/home/PremiumUpsellBanner";
+import { SCENE_TAB_CLEARANCE } from "../../utils/tabBarLayout";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { showPremiumComingSoon } from "../../services/premiumGate";
 
 const LUTEAL_PHASE_DAYS = 14;
 
@@ -32,6 +40,7 @@ export default function HomeScreen() {
   const { t, i18n } = useTranslation();
   const navigation = useNavigation<any>();
   const colors = useAppTheme();
+  const insets = useSafeAreaInsets();
   const prediction = useAppStore((s) => s.prediction);
   const logs = useAppStore((s) => s.logs);
   const cycles = useAppStore((s) => s.cycles);
@@ -76,10 +85,6 @@ export default function HomeScreen() {
   }, [prediction, logs, cycles, i18n.language, mode, pregnancy?.week, clinicalAlerts]);
 
   const menopauseAdvice = useMemo(() => getMenopauseAdvice(today), [today]);
-
-  const openPremium = () => {
-    navigation.navigate("SettingsTab", { screen: "Premium" });
-  };
 
   const openCalendar = () => {
     navigation.navigate("CalendarTab");
@@ -129,7 +134,13 @@ export default function HomeScreen() {
 
   return (
     <WellnessBackground phase={phase}>
-      <ScrollView contentContainerStyle={styles.wrap} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        contentContainerStyle={[
+          styles.wrap,
+          { paddingTop: 24 + Math.max(insets.top, 12), paddingBottom: SCENE_TAB_CLEARANCE },
+        ]}
+        showsVerticalScrollIndicator={false}
+      >
         <Text style={[styles.greeting, { color: colors.text }]}>{t("home_title")}</Text>
         <Text style={[styles.subGreeting, { color: colors.textMuted }]}>{t("home_subtitle")}</Text>
         <LifeStageChip
@@ -139,6 +150,23 @@ export default function HomeScreen() {
         />
 
         <ClinicalAlertsCard title={t("home_alerts_title")} alerts={clinicalAlerts} translate={t} />
+
+        {loggingStreak(logs.map((l) => l.date), today) > 0 ? (
+          <OrganicCard>
+            <Text style={{ color: colors.textMuted, fontWeight: "700" }}>{t("home_streak")}</Text>
+            <Text style={{ color: colors.text, fontWeight: "800", marginTop: 4 }}>
+              {t("home_streak_days", { count: loggingStreak(logs.map((l) => l.date), today) })}
+            </Text>
+          </OrganicCard>
+        ) : null}
+
+        <LogsInsightCard
+          label={t("home_logs")}
+          pills={symptomPills}
+          emptyHint={t("home_logs_empty")}
+          caption={t("home_logs_keep")}
+          onPress={openLog}
+        />
 
         {mode === "PREGNANCY_CARE" && postpartum ? (
           <PostpartumCard title={t("preg_postpartum_title")} body={t("preg_postpartum_body")} />
@@ -154,6 +182,21 @@ export default function HomeScreen() {
               checklistLine={pregnancyMilestoneHint(pregnancy.week)}
               bornLabel={t("preg_born_cta")}
               onBabyBorn={onBabyBorn}
+            />
+            <PrenatalChecklist
+              week={pregnancy.week}
+              completedIds={config?.pregnancy?.prenatalVisitNotes ?? []}
+              title={t("prenatal_title")}
+              translate={t}
+              onToggle={(visitId) => {
+                if (!config?.pregnancy) return;
+                updateConfig({
+                  pregnancy: {
+                    ...config.pregnancy,
+                    prenatalVisitNotes: toggleVisitId(config.pregnancy.prenatalVisitNotes ?? [], visitId),
+                  },
+                });
+              }}
             />
           </>
         ) : null}
@@ -175,7 +218,13 @@ export default function HomeScreen() {
           <MenopausePanel
             kicker={t("meno_kicker")}
             advice={menopauseAdvice}
-            symptomScore={logs[0]?.menopauseSymptoms ? Object.values(logs[0].menopauseSymptoms).reduce((sum, value) => sum + value, 0) : null}
+            symptomScore={
+              typeof config?.menopause?.mrsScore === "number"
+                ? config.menopause.mrsScore
+                : logs[0]?.menopauseSymptoms
+                  ? Object.values(logs[0].menopauseSymptoms).reduce((sum, value) => sum + value, 0)
+                  : null
+            }
           />
         ) : null}
 
@@ -196,7 +245,19 @@ export default function HomeScreen() {
           insight={bodyInsight}
           askLabel={t("ai_ask_cta")}
           onAskAi={openAi}
+          careTitle={t("home_care_title")}
+          careEmotion={t(phaseCareCopy(prediction?.currentPhase).emotionKey)}
+          careNutrition={t(phaseCareCopy(prediction?.currentPhase).nutritionKey)}
+          disclaimer={t("ai_disclaimer")}
         />
+
+        {showPremiumComingSoon() && !config?.premiumActive ? (
+          <PremiumUpsellBanner
+            title={t("home_pro_soon_title")}
+            subtitle={t("home_pro_soon_sub")}
+            onPress={() => navigation.navigate("SettingsTab", { screen: "Premium" })}
+          />
+        ) : null}
 
         {mode === "MENSTRUATION_TRACKING" && prediction ? (
           <PeriodInsightCard
@@ -206,29 +267,13 @@ export default function HomeScreen() {
             onPress={openCalendar}
           />
         ) : null}
-
-        <LogsInsightCard
-          label={t("home_logs")}
-          pills={symptomPills}
-          emptyHint={t("home_logs_empty")}
-          caption={t("home_logs_keep")}
-          onPress={openLog}
-        />
-
-        {!config?.premiumActive ? (
-          <PremiumUpsellBanner
-            title={t("home_premium_banner_title")}
-            subtitle={t("home_premium_banner_sub")}
-            onPress={openPremium}
-          />
-        ) : null}
       </ScrollView>
     </WellnessBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  wrap: { paddingHorizontal: 24, paddingTop: 52, paddingBottom: 120 },
+  wrap: { paddingHorizontal: 24, paddingBottom: SCENE_TAB_CLEARANCE },
   emptyWrap: { justifyContent: "center", alignItems: "center", padding: 24 },
   greeting: {
     ...LuneraTypography.title,

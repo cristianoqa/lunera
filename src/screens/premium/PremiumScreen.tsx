@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Alert, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Alert, Platform, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Text } from "react-native-paper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import { LuneraTypography } from "../../constants/theme";
 import { useAppTheme } from "../../theme/AppThemeProvider";
 import { useAppStore } from "../../store/appStore";
+import { SCENE_TAB_CLEARANCE } from "../../utils/tabBarLayout";
+import { PREMIUM_IAP_LIVE, showPremiumComingSoon } from "../../services/premiumGate";
 
 type PlanId = "monthly" | "yearly";
 
@@ -16,8 +18,8 @@ const PLANS: Record<PlanId, { price: string; periodKey: string }> = {
 };
 
 /**
- * Paywall IAP (stub RevenueCat).
- * Cancelación: en producción vía tienda; aquí demo revierte Pro al instante.
+ * Paywall. En producción (IAP off) solo “próximamente”.
+ * Demo de compra solo en __DEV__ y Android, nunca en builds de tienda.
  */
 export default function PremiumScreen() {
   const { t } = useTranslation();
@@ -27,11 +29,13 @@ export default function PremiumScreen() {
   const updateConfig = useAppStore((s) => s.updateConfig);
   const [loading, setLoading] = useState(false);
   const [plan, setPlan] = useState<PlanId>("yearly");
+  const comingSoon = showPremiumComingSoon();
+  const allowDevDemo = __DEV__ && Platform.OS === "android" && !PREMIUM_IAP_LIVE;
 
   const styles = useMemo(
     () =>
       StyleSheet.create({
-        wrap: { paddingBottom: 40, backgroundColor: colors.bgLinen },
+        wrap: { paddingBottom: SCENE_TAB_CLEARANCE, backgroundColor: colors.bgLinen },
         hero: { margin: 16, borderRadius: 22, padding: 24, alignItems: "center" },
         heroTitle: {
           color: "#FFFFFF",
@@ -123,6 +127,7 @@ export default function PremiumScreen() {
   );
 
   const purchasePro = async () => {
+    if (!allowDevDemo) return;
     setLoading(true);
     try {
       await setPremium(true);
@@ -132,6 +137,8 @@ export default function PremiumScreen() {
         });
       }
       Alert.alert(t("premium_title"), t("premium_purchase_ok"));
+    } catch {
+      Alert.alert(t("premium_title"), t("auth_error"));
     } finally {
       setLoading(false);
     }
@@ -144,9 +151,13 @@ export default function PremiumScreen() {
         text: t("premium_cancel_confirm"),
         style: "destructive",
         onPress: async () => {
-          await setPremium(false);
-          if (config) await updateConfig({ revenueCatCustomerId: null });
-          Alert.alert(t("premium_title"), t("premium_cancel_done"));
+          try {
+            await setPremium(false);
+            if (config) await updateConfig({ revenueCatCustomerId: null });
+            Alert.alert(t("premium_title"), t("premium_cancel_done"));
+          } catch {
+            Alert.alert(t("premium_title"), t("auth_error"));
+          }
         },
       },
     ]);
@@ -165,6 +176,37 @@ export default function PremiumScreen() {
     { icon: "chart-line" as const, label: t("premium_feat_insights") },
     { icon: "cloud-lock-outline" as const, label: t("premium_feat_sync") },
   ];
+
+  if (comingSoon && !allowDevDemo) {
+    return (
+      <ScrollView contentContainerStyle={styles.wrap} showsVerticalScrollIndicator={false}>
+        <LinearGradient
+          colors={["#3D2A5C", "#6B3A6E", "#C45B7A"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.hero}
+        >
+          <MaterialCommunityIcons name="crown" size={36} color={colors.accent} />
+          <Text style={styles.heroTitle}>{t("premium_title")}</Text>
+          <Text style={styles.heroBody}>
+            {Platform.OS === "ios" ? t("premium_ios_coming_soon") : t("premium_coming_soon")}
+          </Text>
+        </LinearGradient>
+        <View style={styles.card}>
+          {features.map((f) => (
+            <View key={f.label} style={styles.featRow}>
+              <MaterialCommunityIcons name="check-circle" size={22} color={colors.accent} />
+              <MaterialCommunityIcons name={f.icon} size={18} color={colors.primary} style={styles.featIcon} />
+              <Text style={styles.feat}>{f.label}</Text>
+            </View>
+          ))}
+        </View>
+        <Text style={styles.legalNote}>
+          {Platform.OS === "ios" ? t("premium_ios_store_note") : t("premium_coming_soon_note")}
+        </Text>
+      </ScrollView>
+    );
+  }
 
   return (
     <ScrollView contentContainerStyle={styles.wrap} showsVerticalScrollIndicator={false}>
@@ -229,7 +271,7 @@ export default function PremiumScreen() {
             style={({ pressed }) => [styles.cta, pressed && styles.ctaPressed, loading && styles.ctaDisabled]}
           >
             <Text style={styles.ctaText}>
-              {loading ? "⏳" : `${t("settings_pro_cta")} · ${PLANS[plan].price}`}
+              {loading ? "…" : `${t("premium_demo")} · ${PLANS[plan].price}`}
             </Text>
           </Pressable>
           <Text style={styles.iapHint}>{t("premium_iap_hint")}</Text>

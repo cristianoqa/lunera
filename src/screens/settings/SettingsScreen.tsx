@@ -7,6 +7,7 @@ import { useAppStore } from "../../store/appStore";
 import { exportEncryptedBackup, shareBackup, importEncryptedBackup } from "../../services/backupService";
 import { ensureNotificationPermission } from "../../services/notificationService";
 import SettingsPremiumBanner from "../../components/settings/SettingsPremiumBanner";
+import { hasPremiumAccess, showPremiumComingSoon } from "../../services/premiumGate";
 import type { AppThemeId, LocaleCode } from "../../types/config";
 import { APP_THEME_IDS, APP_THEMES } from "../../constants/appThemes";
 import { APP_VERSION } from "../../constants/appVersion";
@@ -27,6 +28,7 @@ export default function SettingsScreen({ navigation }: { navigation: any }) {
   // se trata como sesión iniciada para no ocultar acciones de cuenta/logout.
   const isGuest = profile?.authMode === "guest";
   const premiumActive = !!config?.premiumActive;
+  const canUsePremiumFeatures = hasPremiumAccess(premiumActive);
   const lang = (config?.locale ?? (i18n.language.startsWith("pt") ? "pt" : i18n.language.startsWith("en") ? "en" : "es")) as LocaleCode;
   const legal = legalUrls(lang);
 
@@ -55,7 +57,7 @@ export default function SettingsScreen({ navigation }: { navigation: any }) {
   };
 
   const exportPdf = async () => {
-    if (!premiumActive) {
+    if (!canUsePremiumFeatures) {
       navigation.navigate("Premium");
       return;
     }
@@ -102,10 +104,10 @@ export default function SettingsScreen({ navigation }: { navigation: any }) {
     >
       <SettingsPremiumBanner
         title={t("settings_pro_title")}
-        subtitle={t("settings_pro_subtitle")}
+        subtitle={showPremiumComingSoon() ? t("premium_coming_soon") : t("settings_pro_subtitle")}
         cta={t("settings_pro_cta")}
         features={[t("premium_feat_pdf"), t("premium_feat_insights"), t("premium_feat_sync")]}
-        active={premiumActive}
+        active={canUsePremiumFeatures && premiumActive}
         activeLabel={t("premium_active")}
         onPress={() => navigation.navigate("Premium")}
       />
@@ -261,7 +263,7 @@ export default function SettingsScreen({ navigation }: { navigation: any }) {
           <Divider />
           <List.Item
             title={t("settings_pdf")}
-            description={premiumActive ? t("settings_pdf_ok") : t("premium_locked")}
+            description={canUsePremiumFeatures ? t("settings_pdf_ok") : t("premium_locked")}
             left={(p) => <List.Icon {...p} icon="file-pdf-box" color={colors.bronze} />}
             right={(p) => <List.Icon {...p} icon="chevron-right" />}
             onPress={exportPdf}

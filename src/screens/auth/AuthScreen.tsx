@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Alert, ScrollView, StyleSheet, View } from "react-native";
+import { Alert, Linking, Platform, ScrollView, StyleSheet, View } from "react-native";
 import { Button, Text, TextInput } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useTranslation } from "react-i18next";
@@ -11,19 +11,25 @@ import { seedCyclesFromProfile } from "../../services/cycleRecalculationService"
 import { ensureNotificationPermission } from "../../services/notificationService";
 import { registerLocalAccount } from "../../services/localAuthService";
 import { sincronizarDatosLocalesAlServidor } from "../../services/cloudSyncService";
+import { isSupabaseConfigured } from "../../services/supabaseConfig";
 import { naegeleDueDate } from "../../services/pregnancyService";
+import { legalUrls } from "../settings/legalUrls";
+import type { LocaleCode } from "../../types/config";
 
 const KEY_ONBOARDING = "lunera:onboarding_done";
 
 export default function AuthScreen({ navigation, route }: { navigation: any; route: any }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const colors = useAppTheme();
+  const lang = (i18n.language?.slice(0, 2) ?? "es") as LocaleCode;
+  const legal = legalUrls(lang === "pt" ? "pt" : lang === "en" ? "en" : "es");
   const setProfile = useAppStore((s) => s.setProfile);
   const hydrate = useAppStore((s) => s.hydrate);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const styles = useMemo(
     () =>
@@ -37,6 +43,9 @@ export default function AuthScreen({ navigation, route }: { navigation: any; rou
         formHint: { color: colors.textMuted, marginBottom: 12, lineHeight: 20 },
         input: { marginBottom: 10, backgroundColor: colors.surface },
         pwdHint: { color: colors.textMuted, fontSize: 12, marginBottom: 12 },
+        error: { color: colors.pillRed, fontWeight: "700", marginBottom: 12, lineHeight: 18 },
+        privacy: { color: colors.textMuted, textAlign: "center", marginTop: 16, fontSize: 13, lineHeight: 20 },
+        privacyLink: { color: colors.primary, fontWeight: "700" },
       }),
     [colors]
   );
@@ -48,6 +57,7 @@ export default function AuthScreen({ navigation, route }: { navigation: any; rou
     goals: (route.params?.goals ?? ["track_cycle"]) as UserGoal[],
     ageBand: route.params?.ageBand ?? null,
     knownConditions: route.params?.knownConditions ?? [],
+    hasPartner: route.params?.hasPartner ?? null,
   });
 
   const configFromOnboarding = (userId: string) => {
@@ -80,6 +90,10 @@ export default function AuthScreen({ navigation, route }: { navigation: any; rou
   };
 
   const finishGuest = async () => {
+    if (busy) return;
+    setBusy(true);
+    setFormError(null);
+    try {
     const id = `guest_${Date.now()}`;
     const profile = buildProfileFromOnboarding({ id, ...onboardingBase() });
     const config = configFromOnboarding(id);
@@ -92,14 +106,23 @@ export default function AuthScreen({ navigation, route }: { navigation: any; rou
     setProfile(profile);
     await hydrate(id);
     navigation.reset({ index: 0, routes: [{ name: "Main" }] });
+    } catch {
+      setFormError(t("auth_error"));
+    } finally {
+      setBusy(false);
+    }
   };
 
   const finishWithAccount = async () => {
+    if (busy) return;
     if (!email.includes("@") || password.length < 6) {
-      Alert.alert(t("auth_title"), t("auth_invalid"));
+      const msg = t("auth_invalid");
+      setFormError(msg);
+      if (Platform.OS !== "web") Alert.alert(t("auth_title"), msg);
       return;
     }
     setBusy(true);
+    setFormError(null);
     try {
       const guestId = `guest_${Date.now()}`;
       const guest = buildProfileFromOnboarding({ id: guestId, ...onboardingBase() });
@@ -107,7 +130,14 @@ export default function AuthScreen({ navigation, route }: { navigation: any; rou
       await AsyncStorage.setItem("lunera:profile", JSON.stringify(guest));
       await saveConfig(configFromOnboarding(guestId));
 
-      const upgraded = await registerLocalAccount({ email, password, profile: guest });
+      let upgraded = guest;
+      if (isSupabaseConfigured()) {
+        const auth = await import("../../services/authService");
+        upgraded = await auth.signUpWithEmail(email.trim(), password);
+      } else {
+        upgraded = await registerLocalAccount({ email, password, profile: guest });
+      }
+
       await migrateUserData(guestId, upgraded.id);
       const existing = await loadCycles();
       await saveCycles([...existing.filter((c) => c.userId !== upgraded.id), ...seedCyclesFromProfile(upgraded)]);
@@ -115,15 +145,18 @@ export default function AuthScreen({ navigation, route }: { navigation: any; rou
       await ensureNotificationPermission();
       setProfile(upgraded);
       await hydrate(upgraded.id);
-      await sincronizarDatosLocalesAlServidor(upgraded).catch(() => {});
+      void sincronizarDatosLocalesAlServidor(upgraded).catch(() => {});
       navigation.reset({ index: 0, routes: [{ name: "Main" }] });
-    } catch (e: any) {
-      const code = String(e?.message ?? e);
+    } catch (e: unknown) {
+      const code = String((e as { message?: string })?.message ?? e);
       const map: Record<string, string> = {
         email_taken: t("auth_email_taken"),
         invalid_credentials: t("auth_invalid"),
+        "User already registered": t("auth_email_taken"),
       };
-      Alert.alert(t("auth_title"), map[code] ?? t("auth_error"));
+      const msg = map[code] ?? (code.includes("already") ? t("auth_email_taken") : t("auth_error"));
+      setFormError(msg);
+      if (Platform.OS !== "web") Alert.alert(t("auth_title"), msg);
     } finally {
       setBusy(false);
     }
@@ -135,12 +168,15 @@ export default function AuthScreen({ navigation, route }: { navigation: any; rou
         {t("auth_title")}
       </Text>
 
-      <Button mode="contained" onPress={finishGuest} style={styles.primary}>
+      <Button mode="contained" onPress={finishGuest} loading={busy} disabled={busy} style={styles.primary}>
         {t("auth_guest")}
       </Button>
       <Text variant="bodySmall" style={styles.hint}>
         {t("auth_guest_hint")}
       </Text>
+      {formError ? (
+        <Text style={styles.error}>{formError}</Text>
+      ) : null}
 
       {!showForm ? (
         <Button mode="outlined" onPress={() => setShowForm(true)} style={styles.secondary}>
@@ -167,15 +203,26 @@ export default function AuthScreen({ navigation, route }: { navigation: any; rou
             style={styles.input}
           />
           <Text style={styles.pwdHint}>{t("auth_password_hint")}</Text>
-          <Button mode="contained" loading={busy} onPress={finishWithAccount} style={styles.primary}>
+          <Button mode="contained" loading={busy} disabled={busy} onPress={finishWithAccount} style={styles.primary}>
             {t("auth_register")}
           </Button>
         </View>
       )}
 
-      <Button mode="text" onPress={finishGuest}>
+      <Button mode="text" onPress={finishGuest} disabled={busy}>
         {t("auth_later")}
       </Button>
+      <Text style={styles.privacy}>
+        {t("onboarding_legal_accept")}{" "}
+        <Text style={styles.privacyLink} onPress={() => Linking.openURL(legal.privacy)}>
+          {t("settings_privacy")}
+        </Text>
+        {" "}
+        {t("onboarding_legal_and")}{" "}
+        <Text style={styles.privacyLink} onPress={() => Linking.openURL(legal.terms)}>
+          {t("settings_terms")}
+        </Text>
+      </Text>
     </ScrollView>
   );
 }
