@@ -16,6 +16,7 @@
     },
     "preview": {
       "distribution": "store",
+      "autoIncrement": true,
       "ios": {
         "simulator": false,
         "resourceClass": "m-medium"
@@ -37,7 +38,8 @@
       "autoIncrement": true,
       "distribution": "store",
       "ios": {
-        "simulator": false
+        "simulator": false,
+        "resourceClass": "m-medium"
       },
       "android": {
         "buildType": "app-bundle"
@@ -45,6 +47,23 @@
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "track": "internal",
+        "releaseStatus": "draft"
+      },
+      "ios": {
+        "appleId": "cristianorodrigues2701@gmail.com",
+        "appleTeamId": "YJFQX9K34K",
+        "ascAppId": "6807875927"
+      }
+    },
+    "preview": {
+      "ios": {
+        "appleId": "cristianorodrigues2701@gmail.com",
+        "appleTeamId": "YJFQX9K34K",
+        "ascAppId": "6807875927"
+      }
+    }
   }
 }
