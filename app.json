@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.flowhome.lunera",
-      "buildNumber": "25",
+      "buildNumber": "32",
       "infoPlist": {
         "NSFaceIDUsageDescription": "Lunera usa Face ID para proteger tus datos de salud.",
         "NSUserNotificationsUsageDescription": "Lunera te envía recordatorios locales sobre tu ciclo y tu registro diario.",
@@ -28,7 +28,7 @@
     },
     "android": {
       "package": "com.flowhome.lunera",
-      "versionCode": 23,
+      "versionCode": 24,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FBF9F6"
@@ -57,7 +57,8 @@
           "faceIDPermission": "Lunera usa Face ID para proteger tus datos de salud."
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-sharing"
     ],
     "web": {
       "bundler": "metro",
