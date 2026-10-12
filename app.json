@@ -15,7 +15,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.flowhome.lunera",
-      "buildNumber": "32",
+      "buildNumber": "33",
       "infoPlist": {
         "NSFaceIDUsageDescription": "Lunera usa Face ID para proteger tus datos de salud.",
         "NSUserNotificationsUsageDescription": "Lunera te envía recordatorios locales sobre tu ciclo y tu registro diario.",
